@@ -239,6 +239,72 @@ export const constantRoutes = [
   },
 
   {
+    path: '/cmdb',
+    component: Layout,
+    redirect: '/cmdb/host/list',
+    alwaysShow: true, // will always show the root menu
+    name: 'cmdb',
+    meta: {
+      title: '配置平台',
+      icon: 'cmdb',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'host/list',
+        component: () => import('@/views/cmdb/host/host'),
+        name: 'host',
+        meta: {
+          title: '主机管理',
+          icon: 'host',
+        }
+      },
+      {
+        path: 'vhm/list',
+        component: () => import('@/views/cmdb/vhm/vhm'),
+        name: 'vhm',
+        meta: {
+          title: '虚拟机管理',
+          icon: 'vhm',
+        }
+      },
+      {
+        path: 'app/list',
+        component: () => import('@/views/cmdb/app/application'),
+        name: 'app',
+        meta: {
+          title: '业务管理',
+          icon: 'app',
+        }
+      },
+    ]
+  },
+
+  {
+    path: '/order',
+    component: Layout,
+    redirect: '/order/alert/list',
+    alwaysShow: true, // will always show the root menu
+    name: 'order',
+    meta: {
+      title: '工单管理',
+      icon: 'order',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'order/list',
+        component: () => import('@/views/order/alert/index'),
+        name: 'alert',
+        meta: {
+          title: '告警工单',
+          icon: 'alert',
+        }
+      },
+    ]
+  },
+
+  {
     path: '/setting',
     component: Layout,
     redirect: '/setting/user/list',

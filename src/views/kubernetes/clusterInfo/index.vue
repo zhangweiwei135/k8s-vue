@@ -75,13 +75,13 @@
 
         <el-upload
           class="upload-demo"
-          action="http://127.0.0.1:8083/kubernetes/clusterInfo/upload"
+          :action="this.upload_url"
           :before-remove="beforeRemove"
           :on-success="handleSuccess"
           multiple
           :limit="3"
           :on-exceed="handleExceed"
-          :file-list="fileList">
+          >
           <el-button  size="mini" type="primary">上传文件</el-button>
           <div slot="tip" class="el-upload__tip">kubeConf yaml或者json格式</div>
         </el-upload>
@@ -118,6 +118,7 @@ import { k8sList } from '@/api/kubernetes'
 import { k8sAdd } from '@/api/kubernetes'
 import {k8sDel} from '@/api/kubernetes'
 import {k8sUpdate} from '@/api/kubernetes'
+import {upload_url} from '@/api/pods'
 
 export default {
   name: 'kubernetesInfo',
@@ -140,6 +141,7 @@ export default {
       dialogClusterVisible: false,
       formLabelWidth: '80px', //添加用户表框宽度
       fileList: null,
+      upload_url: process.env.VUE_APP_BASE_API + "/kubernetes/clusterInfo/upload",
       list: [{
         name: 'food.jpeg',
         url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
@@ -223,24 +225,16 @@ export default {
         vm.$message.error("删除失败")
       })
     },
-    // handleInfo(row){
-    //   console.log(row)
-    //   //this.$router.push('workload')
-    //   this.$router.push({
-    //     name: 'deployment', params: {clustername: row.name}
-    //    })
-    //   //this.$route.push({path: 'http://127.0.0.1:8083/kubernetes/workload/deployment/list?name=' + row.name})
-    // },
-    handleSuccess(response, file, fileList){
+    handleSuccess(response, file){
       if(response.code == 200){
         this.clusterInfo.filename = file.name
         console.log(this.clusterInfo.filename)
       }
     },
-    handleExceed(files, fileList) {
+    handleExceed(files) {
       this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件`);
     },
-    beforeRemove(file,fileList) {
+    beforeRemove(file) {
       return this.$confirm(`确定移除 ${ file.name }？`);
     },
   }

@@ -143,7 +143,6 @@ import { userDel } from '@/api/setting'
 import { userAdd } from '@/api/setting'
 import { userUpdate } from '@/api/setting'
 import { paginationList } from '@/api/setting'
-import { parseTime } from '@/utils'
 import { searchUser } from '@/api/setting'
 
 export default {
@@ -210,7 +209,7 @@ export default {
       }).then(function(response){
         vm.listLoading = false
         vm.list = response.data
-        this.listQuery.page = 1
+        vm.listQuery.page = 1
       })
     },
     handleDelete(name) {
@@ -274,32 +273,32 @@ export default {
       })
     },
     handleDownload() {
-      var vm = this
-      this.downloadLoading = true
-      import('@/vendor/Export2Excel').then(excel => {
-        const tHeader = [ '用户ID', '用户名', '角色', '部门','电话','邮件']
-        const filterVal = ['uid', 'name', 'role', 'department','mobile','mail']
-        const list = vm.list
-        const data = vm.formatJson(filterVal, list)
-        excel.export_json_to_excel({
-          header: tHeader,
-          data,
-          filename: '用户信息',
-          autoWidth: true,
-          bookType: "xlsx"
-        })
-        vm.downloadLoading = false
-      })
+      // var vm = this
+      // this.downloadLoading = true
+      // import('@/vendor/Export2Excel').then(excel => {
+      //   const tHeader = [ '用户ID', '用户名', '角色', '部门','电话','邮件']
+      //   const filterVal = ['uid', 'name', 'role', 'department','mobile','mail']
+      //   const list = vm.list
+      //   const data = vm.formatJson(filterVal, list)
+      //   excel.export_json_to_excel({
+      //     header: tHeader,
+      //     data,
+      //     filename: '用户信息',
+      //     autoWidth: true,
+      //     bookType: "xlsx"
+      //   })
+      //   vm.downloadLoading = false
+      // })
     },
-    formatJson(filterVal, jsonData) {
-      return jsonData.map(v => filterVal.map(j => {
-        if (j === 'timestamp') {
-          return parseTime(v[j])
-        } else {
-          return v[j]
-        }
-      }))
-    }
+    // formatJson(filterVal, jsonData) {
+    //   return jsonData.map(v => filterVal.map(j => {
+    //     if (j === 'timestamp') {
+    //       return parseTime(v[j])
+    //     } else {
+    //       return v[j]
+    //     }
+    //   }))
+    // },
   }
 }
 </script>

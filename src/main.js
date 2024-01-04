@@ -14,6 +14,7 @@ import router from './router'
 
 import '@/icons' // icon
 import '@/permission'
+import axios from 'axios'
 
 
 /**
@@ -37,6 +38,8 @@ Vue.use(ElementUI)
 
 
 Vue.config.productionTip = false
+
+
 
 new Vue({
   el: '#app',

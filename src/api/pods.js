@@ -1,6 +1,7 @@
-import request from '@/utils/requestCluster'
+import request from '@/utils/request'
 
-export const ws_url = 'ws://localhost:8083' ;
+export const ws_url = 'ws://124.221.177.224:32473' ;
+export const upload_url = 'http://124.221.177.224:32473' ;
 
 
 export function podsList(data) {

@@ -1,4 +1,4 @@
-import request from '@/utils/requestCluster'
+import request from '@/utils/request'
 
 export function SvcList(data) {
   return request({

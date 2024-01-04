@@ -6,7 +6,7 @@
 <script>
 
 import {Terminal} from 'xterm'
-import {ws_url} from '@/api/pods'
+
 
 export default {
   name: 'terminal',
@@ -67,7 +67,8 @@ export default {
     //初始化 websocket 客户端
     initWS(){
       var vm = this
-      this.ws_url = ws_url
+      this.ws_url = process.env.VUE_APP_WS_URL
+      console.log(this.ws_url)
       //var ws = new WebSocket("ws://localhost:8083/pod/terminal?namespace=default&name=web-96d5df5c8-9qbjb&cname=nginx&cluster_name=cluster3");
       var ws = new WebSocket(this.ws_url+"/pod/terminal?namespace="+this.$route.params.namespace+"&name="+
       this.$route.params.pod_name+"&cluster_name="+this.$route.params.cluster_name)
